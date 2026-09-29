@@ -1,0 +1,26 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+
+  --color-feefo-yellow: #ffca2b;
+  --color-feefo-yellow-soft: #fff6d9;
+  --color-feefo-yellow-dark: #9a6b00;
+  --color-feefo-ink: #292f36;
+  --color-feefo-slate: #5a6170;
+  --color-feefo-track: #e4e4e4;
+  --color-feefo-muted: #d3d3d3;
+  --color-feefo-border: #d9d9d9;
+  --color-feefo-error: #b42318;
+  --color-feefo-success: #067647;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-neutral-50 font-sans text-feefo-ink antialiased;
+  }
+}
