@@ -5,8 +5,9 @@ import type {
   StarValue,
 } from '../types/rating'
 import { isStarValue, resolveAverageRating } from '../utils/rating'
+import { API_BASE_URL } from './config'
 
-export const PRODUCT_RATING_ENDPOINT = '/api/product-rating'
+export const PRODUCT_RATING_ENDPOINT = `${API_BASE_URL}/product-rating`
 export const USER_RATING_ENDPOINT = `${PRODUCT_RATING_ENDPOINT}/user-rating`
 
 export class ApiError extends Error {

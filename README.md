@@ -35,7 +35,7 @@ npm run dev        # http://localhost:5173
 
 ```
 src/
-  api/          fetch client + runtime response validation
+  api/          fetch client, API base URL config + runtime response validation
   hooks/        useProductRating (loading / success / error + retry)
   components/   ProductRatingCard, RatingSummary, RatingEmpty, RateProduct, StarRating,
                 RatingBreakdown, RatingBreakdownRow, RatingSkeleton, RatingError,
@@ -49,9 +49,20 @@ cypress/
   support/      custom commands (visitRating, useMockScenario, checkAccessibility…)
 ```
 
+## Configuration
+
+Settings are Vite environment variables. The defaults are committed in `.env`; override them in `.env.local` (git-ignored), in an environment-specific file such as `.env.production.local`, or as real environment variables when building (e.g. in CI), which take precedence over the files.
+
+| Variable            | Default   | Description                                                                                                              |
+| ------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `VITE_API_BASE_URL` | `/api`    | Base URL the endpoints below are appended to. `/api` means the same origin as the app; e.g. `https://api.example.com/v1` |
+| `VITE_API_MOCKING`  | `enabled` | Set to `disabled` to call the real API instead of MSW                                                                    |
+
+These values are inlined at build time, so each environment needs its own build, e.g. `VITE_API_BASE_URL=https://api.example.com/v1 VITE_API_MOCKING=disabled npm run build`. They end up in the browser bundle, so don't put secrets in them. If the API is on a different origin, it has to allow the app's origin via CORS.
+
 ## Mock API
 
-There's no backend yet. [MSW](https://mswjs.io) mocks these endpoints in the browser (and in Jest via `msw/node`). Set `VITE_API_MOCKING=disabled` in `.env.local` to use a real API.
+There's no backend yet. [MSW](https://mswjs.io) mocks these endpoints in the browser (and in Jest via `msw/node`). Set `VITE_API_MOCKING=disabled` in `.env.local` to use a real API. Paths are relative to `VITE_API_BASE_URL` (shown with the default `/api`).
 
 | Endpoint                              | Description                                                                                                        |
 | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
